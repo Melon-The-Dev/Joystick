@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://dym2o3j6535l8"]
+
+[ext_resource type="Script" path="res://joystick/joystick_object.gd" id="1_w04hc"]
+[ext_resource type="Texture2D" uid="uid://da1ydwx2p32ji" path="res://joystick/joystick_base_outline.png" id="2_v5ju5"]
+[ext_resource type="Texture2D" uid="uid://cgqrwiwfe13us" path="res://joystick/joystick_tip_arrows.png" id="3_4e5a1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eptxd"]
+radius = 0.0
+
+[node name="Joystick" type="Area2D"]
+position = Vector2(2, -2)
+collision_layer = 3
+collision_mask = 3
+priority = 5.0
+script = ExtResource("1_w04hc")
+/bg_texture = ExtResource("2_v5ju5")
+/fg_texture = ExtResource("3_4e5a1")
+/bg_size = 0.0
+/Opacity/pressed_opacity = 1
+/Opacity/normal_opacity = 0.0
+/Opacity/linear = null
+/Joystick_Type = 0
+
+[node name="Touch_area" type="Area2D" parent="."]
+position = Vector2(2, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Touch_area"]
+
+[node name="bg" type="Sprite2D" parent="."]
+texture = ExtResource("2_v5ju5")
+
+[node name="fg" type="Sprite2D" parent="bg"]
+texture = ExtResource("3_4e5a1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_eptxd")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Touch_area" to="." method="_on_touch_area_mouse_entered"]
+[connection signal="mouse_exited" from="Touch_area" to="." method="_on_touch_area_mouse_exited"]
